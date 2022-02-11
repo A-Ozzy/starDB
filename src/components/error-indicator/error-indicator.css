@@ -1,0 +1,11 @@
+.error-indicator {
+   padding: 0 10px;
+
+}
+
+.error-indicator > span{
+   color: goldenrod;
+   display: block;
+   font-style: italic;
+   text-align: center;
+}
