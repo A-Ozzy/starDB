@@ -60,18 +60,18 @@ export default class App extends Component {
                </button>
                <ErrorButton />
             </div>
-
-            <div className="row mb2">
+            <PeoplePage/>
+            {/* <div className="row mb2">
                <div className="col-md-6">
                   <ItemList
                      onItemSelected={this.onPersonSelected}
                      getData={this.swapiService.getAllPlanets}
-                     renderItem={(item) => (<span>{item.name} </span>)}/>
+                     renderItem={(item) => (<span>{item.name}</span>)}/>
                </div>
                <div className="col-md-6">
                   <PersonDetails personId={this.state.selectedPerson} />
                </div>
-            </div>
+            </div> */}
          </div >
       );
    }
