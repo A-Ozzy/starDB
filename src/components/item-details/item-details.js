@@ -9,7 +9,7 @@ const Record = ({ item, field, label }) => {
    return (
       <li className="list-group-item">
          <span className="term">{label}</span>
-         <span>{item[field]}</span>
+         <span>{ item[field] }</span>
       </li>
    );
 };
@@ -20,7 +20,7 @@ export {
 
 
 
-export default class ItemDetails extends Component {
+export default class    ItemDetails extends Component {
 
    swapiService = new SwapiService();
 
@@ -34,15 +34,17 @@ export default class ItemDetails extends Component {
    }
 
    componentDidUpdate(prevProps) {
-      if (this.props.itemId !== prevProps.itemId) {
+      if (this.props.itemId !== prevProps.itemId ||
+          this.props.getData !== prevProps.getData ||
+          this.props.getImageUrl !== prevProps.getImageUrl) {
          this.updateItem();
       }
    }
 
    updateItem() {
-      // console.log(this.props);
 
       const { itemId, getData, getImageUrl } = this.props;
+
 
       if (!itemId) {
          return
@@ -50,7 +52,7 @@ export default class ItemDetails extends Component {
 
       getData(itemId)
          .then((item) => {
-            console.log(item);
+            item.id = !item.id ? itemId : item.id;
             this.setState({
                item,
                image: getImageUrl(item),
@@ -66,8 +68,7 @@ export default class ItemDetails extends Component {
          return <span>Select a item from a list</span>;
       }
 
-      const { id, name, gender,
-         birthYear, eyeColor } = item;
+      const { name } = item;
 
       return (
          <div className="item-details card">
@@ -79,22 +80,10 @@ export default class ItemDetails extends Component {
                <h4>{name}</h4>
                <ul className="list-group list-group-flush">
                   {
-                     React.Children.map(this.props.children, (child, idx) => {
-                        return React.cloneElement(child, {item})
+                     React.Children.map(this.props.children, (child) => {
+                        return React.cloneElement(child, { item })
                      })
                   }
-                  {/* <li className="list-group-item">
-                     <span className="term">Gender</span>
-                     <span>{gender}</span>
-                  </li>
-                  <li className="list-group-item">
-                     <span className="term">Birth Year</span>
-                     <span>{birthYear}</span>
-                  </li>
-                  <li className="list-group-item">
-                     <span className="term">Eye Color</span>
-                     <span>{eyeColor}</span>
-                  </li> */}
                </ul>
                <ErrorButton />
             </div>
@@ -102,32 +91,3 @@ export default class ItemDetails extends Component {
       );
    }
 }
-
-// const PeopleView = ({ item }) => {
-//    const { id, name, gender, birthYear, eyeColor } = item;
-
-//    return (
-//       <React.Fragment>
-//          <img className="person-image"
-//             src={image} />
-//          <div className="card-body">
-//             <h4>{name}</h4>
-//             <ul className="list-group list-group-flush">
-//                <li className="list-group-item">
-//                   <span className="term">Gender</span>
-//                   <span>{gender}</span>
-//                </li>
-//                <li className="list-group-item">
-//                   <span className="term">Birth Year</span>
-//                   <span>{birthYear}</span>
-//                </li>
-//                <li className="list-group-item">
-//                   <span className="term">Eye Color</span>
-//                   <span>{eyeColor}</span>
-//                </li>
-//             </ul>
-//             <ErrorButton />
-//          </div>
-//       </React.Fragment>
-//    )
-// }
