@@ -43,7 +43,7 @@ export default class SwapiService {
       return this._transformStarship(starship);
    };
 
-   getPersonImage = ({ id }) => {      
+   getPersonImage = ({ id }) => {
       return `${this._imageBase}/characters/${id}.jpg`;
    };
 
@@ -56,7 +56,7 @@ export default class SwapiService {
    };
 
    _extractId = (item) => {
-      const idRegExp = /\/([0-9]*)\/$/;      
+      const idRegExp = /\/([0-9]*)\/$/;
       return item.url.match(idRegExp)[1];
    };
 
@@ -72,7 +72,7 @@ export default class SwapiService {
 
    _transformStarship = (starship) => {
       return {
-         //  id: this._extractId(starship),
+         id: this._extractId(starship),
          name: starship.name,
          model: starship.model,
          manufacturer: starship.manufacturer,
