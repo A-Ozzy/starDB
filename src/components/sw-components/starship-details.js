@@ -1,10 +1,11 @@
 import React from 'react';
 import ItemDetails, { Record } from '../item-details';
 import { withSwapiService } from '../hoc-helpers';
+import { useParams, useLocation } from 'react-router-dom';
 
 
 const StarshipDetails = (props) => {
-
+   
    return (
       <ItemDetails {...props}>
       
